@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+<!-- 扫描controller -->
+<context:component-scan base-package="com.offcn.controller"/>
+ <!-- 一定要注册mvc注解驱动，否则responseBody注解不能使用 -->
+    <mvc:annotation-driven />
+  <bean id="resourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 配置上传处理BEAN -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <!-- 上传编码 -->
+       <property name="defaultEncoding" value="utf-8"/>
+       <!-- 设置上传文件最大限制 -->
+       <property name="maxUploadSize" value="10240000000000"/>
+       <!-- 设置最大占用内存大小 -->
+       <property name="maxInMemorySize" value="4096000"/>
+    </bean>
+    
+     <mvc:resources mapping="/js/**" location="/js/"/>
+   <mvc:resources mapping="/*.html" location="/"/>
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.offcn.dao.MobileDao">
+
+
+<insert id="save" parameterType="com.offcn.po.Mobile">
+ insert into mobile(mobilenumber,mobilearea,mobiletype,areacode,postcode) values(#{mobilenumber},#{mobilearea},#{mobiletype},#{areacode},#{postcode})
+
+</insert>
+
+<insert id="saves"  parameterType="java.util.List">
+
+insert into mobile(mobilenumber,mobilearea,mobiletype,areacode,postcode) values
+<foreach collection="list" item="m" separator=",">
+(#{m.mobilenumber},#{m.mobilearea},#{m.mobiletype},#{m.areacode},#{m.postcode})
+</foreach>
+</insert>
+<select id="findMobile" parameterType="String" resultType="com.offcn.po.Mobile">
+select * from mobile where mobilenumber=#{mobilenumber}
+</select>
+</mapper>
